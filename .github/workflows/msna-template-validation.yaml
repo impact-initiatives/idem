@@ -39,17 +39,21 @@ jobs:
 
           xlsform = os.environ["XLSFORM_PATH"]
           warnings = []
+          error = None
 
+          print("::group::pyxform conversion details")
           try:
               convert(xlsform=xlsform, validate=False, warnings=warnings)
           except PyXFormError as e:
-              for w in warnings:
-                  print(f"WARNING: {w}")
-              print(f"ERROR: {e}", file=sys.stderr)
-              sys.exit(1)
+              error = e
+          print("::endgroup::")
 
           for w in warnings:
-              print(f"WARNING: {w}", file=sys.stderr)
+              print(f"::warning::{w}")
+
+          if error:
+              print(f"::error::{error}")
+              sys.exit(1)
 
           if warnings:
               sys.exit(1)
@@ -76,7 +80,7 @@ jobs:
           survey_full <- readxl::read_excel(xlsform, sheet = "survey")
           choices     <- readxl::read_excel(xlsform, sheet = "choices")
           survey_req  <- dplyr::filter(survey_full, req == 1)
-          trim_path <- file.path(Sys.getenv("RUNNER_TEMP"), "trim_form.xlsx")
+          trim_path   <- file.path(Sys.getenv("RUNNER_TEMP"), "trim_form.xlsx")
           openxlsx2::write_xlsx(
             list(survey = survey_req, choices = choices),
             trim_path, overwrite = TRUE, na = ""
@@ -86,7 +90,8 @@ jobs:
           potential_other <- intersect(paste0("other_", required_names), complete_names)
           missing         <- setdiff(potential_other, required_names)
           if (length(missing) > 0) {
-            message("other_ in full form missing from required: ", paste(missing, collapse = ", "))
+            cat("::error::other_ questions in full form missing from required: ",
+                paste(missing, collapse = ", "), "\n")
             quit(status = 1)
           }
           message("OK — other_ coverage check passed.")
@@ -101,17 +106,21 @@ jobs:
 
           xlsform = os.path.join(os.environ["RUNNER_TEMP"], "trim_form.xlsx")
           warnings = []
+          error = None
 
+          print("::group::pyxform conversion details")
           try:
               convert(xlsform=xlsform, validate=False, warnings=warnings)
           except PyXFormError as e:
-              for w in warnings:
-                  print(f"WARNING: {w}")
-              print(f"ERROR: {e}", file=sys.stderr)
-              sys.exit(1)
+              error = e
+          print("::endgroup::")
 
           for w in warnings:
-              print(f"WARNING: {w}", file=sys.stderr)
+              print(f"::warning::{w}")
+
+          if error:
+              print(f"::error::{error}")
+              sys.exit(1)
 
           if warnings:
               sys.exit(1)
@@ -120,7 +129,14 @@ jobs:
           PYEOF
 
       - name: Regenerate msna_template_required
-        run: Rscript -e "devtools::load_all(); source('data-raw/msna_template_required.R')"
+        run: |
+          echo "::group::devtools output"
+          Rscript -e "devtools::load_all(); source('data-raw/msna_template_required.R')"
+          echo "::endgroup::"
 
       - name: Check generated data in sync with form.xlsx
-        run: git diff --exit-code data/
+        run: |
+          if ! git diff --exit-code data/; then
+            echo "::error::Generated data is out of sync with form.xlsx. Run 'just data' locally and commit the result."
+            exit 1
+          fi
