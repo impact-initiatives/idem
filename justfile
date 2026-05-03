@@ -74,7 +74,7 @@ data:
 # ── Validation ────────────────────────────────────────────────────────────────
 
 # Validate form.xlsx: pyxform check, trim + other_ coverage, trim pyxform check (mirrors CI)
-val:
+check-form:
     uv run python tools/validate_xlsform.py inst/extdata/form.xlsx
     Rscript tools/trim_xlsform.R
     uv run python tools/validate_xlsform.py inst/extdata/form_required.xlsx
