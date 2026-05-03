@@ -7,9 +7,15 @@ on:
   pull_request:
     paths:
       - "inst/extdata/form.xlsx"
+  workflow_dispatch:
+    inputs:
+      xlsform_path:
+        description: "Path to the XLSForm file"
+        default: "inst/extdata/form.xlsx"
+        required: false
 
 env:
-  XLSFORM_PATH: "inst/extdata/form.xlsx"
+  XLSFORM_PATH: ${{ inputs.xlsform_path || 'inst/extdata/form.xlsx' }}
 
 jobs:
   validate:
