@@ -61,12 +61,12 @@ path <- system.file("extdata/form.xlsx", package = "idem")
 form <- read_xlsform(path)
 form
 #> <xlsform> /home/runner/work/_temp/Library/idem/extdata/form.xlsx
-#> • survey: 710 rows
+#> • survey: 717 rows
 #> • choices: 3714 rows
 
 # Inspect the survey sheet directly
 form$survey
-#> # A tibble: 710 × 23
+#> # A tibble: 717 × 23
 #>    level      req theme module indicator index type  name  `label::english (en)`
 #>    <chr>    <dbl> <chr> <chr>  <chr>     <dbl> <chr> <chr> <chr>                
 #>  1 metadata     1 Meta… NA     NA           NA audit audit NA                   
@@ -79,7 +79,7 @@ form$survey
 #>  8 main         1 Intr… Inter… % of int…     1 sele… surv… Survey modality      
 #>  9 main         1 Intr… Inter… For data…     2 sele… enum… Enumerator id        
 #> 10 main         0 Intr… Inter… % of int…     3 sele… enum… What is the enumerat…
-#> # ℹ 700 more rows
+#> # ℹ 707 more rows
 #> # ℹ 14 more variables: `label::french (fr)` <chr>, `hint::english (en)` <chr>,
 #> #   `hint::french (fr)` <chr>, calculation <chr>, required <lgl>,
 #> #   relevant <chr>, constraint <chr>, default <lgl>, repeat_count <chr>,
@@ -93,6 +93,6 @@ read_xlsform(path, optional_sheets = "settings")
 #> /home/runner/work/_temp/Library/idem/extdata/form.xlsx.
 #> ! Excluded: "settings"
 #> <xlsform> /home/runner/work/_temp/Library/idem/extdata/form.xlsx
-#> • survey: 710 rows
+#> • survey: 717 rows
 #> • choices: 3714 rows
 ```

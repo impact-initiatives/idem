@@ -54,6 +54,9 @@ form <- read_xlsform(system.file("extdata/form.xlsx", package = "idem"))
 
 # All choice options, organised by list name
 xlsform_choices(form)
+#> $`Pour acheter de la nourriture`
+#> [1] "food"
+#> 
 #> $cm_income_sources_reduced_1
 #>  [1] "regular"           "casual"            "own_business"     
 #>  [4] "own_production"    "social_benefits"   "rent"             
@@ -780,9 +783,9 @@ xlsform_choices(form)
 #> [1] "yes"            "no_had_no_need" "no_exhausted"   "not_applicable"
 #> 
 #> $l_fsl_lcsi_en_other
-#> [1] "food"              "rent_shelter"      "education"        
-#> [4] "health"            "nfis"              "wash"             
-#> [7] "dwelling_services" "debts"             "other"            
+#> [1] "rent_shelter"      "education"         "health"           
+#> [4] "nfis"              "wash"              "dwelling_services"
+#> [7] "debts"             "other"            
 #> 
 #> $l_fsl_lcsi_other
 #> [1] "none"              "rent_shelter"      "education"        
@@ -927,7 +930,7 @@ xlsform_choices(form)
 #>  [9] "route_to_fields"            "route_from_religious_place"
 #> [11] "in_home"                    "public_transport"          
 #> [13] "collecting_firewood"        "crossing_checkpoints"      
-#> [15] "dont_know"                  "prefer_not_answer"         
+#> [15] "dnk"                        "pnta"                      
 #> 
 #> $l_prot_concern_impact
 #>  [1] "no_impact"                   "self_restrict_movement"     
