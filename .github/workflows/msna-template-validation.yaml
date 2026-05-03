@@ -1,4 +1,4 @@
-name: msna_template_validation
+name: msna-template-validation
 
 on:
   push:
