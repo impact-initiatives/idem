@@ -1,0 +1,7 @@
+[project]
+name = "idem"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "pyxform>=4.4.1",
+]

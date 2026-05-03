@@ -56,9 +56,6 @@ renv/
 renv.lock
 .Rprofile
 
-# Python tooling
-uv.lock
-
 # Generated artifacts
 report.xlsx
 inst/extdata/trim_form.xlsx
@@ -66,3 +63,4 @@ inst/extdata/trim_form.xml
 
 # Scratch files
 foo.R
+.venv
