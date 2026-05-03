@@ -16,6 +16,7 @@ on:
 
 env:
   XLSFORM_PATH: ${{ inputs.xlsform_path || 'inst/extdata/form.xlsx' }}
+  UV_LINK_MODE: copy
 
 jobs:
   validate:
@@ -26,8 +27,10 @@ jobs:
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
 
-      - name: Run pyxform validation
+      - name: Validate form.xlsx with pyxform
         run: |
           uv run python - <<'PYEOF'
           import os, sys
@@ -53,3 +56,71 @@ jobs:
           else:
               print("OK — no issues found.")
           PYEOF
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.5.2'
+          use-public-rspm: true
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::devtools, any::openxlsx2
+          needs: Imports
+
+      - name: Trim form and check other_ coverage
+        run: |
+          Rscript - <<'EOF'
+          xlsform     <- Sys.getenv("XLSFORM_PATH")
+          survey_full <- readxl::read_excel(xlsform, sheet = "survey")
+          choices     <- readxl::read_excel(xlsform, sheet = "choices")
+          survey_req  <- dplyr::filter(survey_full, req == 1)
+          trim_path <- file.path(Sys.getenv("RUNNER_TEMP"), "trim_form.xlsx")
+          openxlsx2::write_xlsx(
+            list(survey = survey_req, choices = choices),
+            trim_path, overwrite = TRUE, na = ""
+          )
+          complete_names  <- na.omit(unique(survey_full$name))
+          required_names  <- na.omit(unique(survey_req$name))
+          potential_other <- intersect(paste0("other_", required_names), complete_names)
+          missing         <- setdiff(potential_other, required_names)
+          if (length(missing) > 0) {
+            message("other_ in full form missing from required: ", paste(missing, collapse = ", "))
+            quit(status = 1)
+          }
+          message("OK — other_ coverage check passed.")
+          EOF
+
+      - name: Validate trim_form.xlsx with pyxform
+        run: |
+          uv run python - <<'PYEOF'
+          import os, sys
+          from pyxform.xls2xform import convert
+          from pyxform.errors import PyXFormError
+
+          xlsform = os.path.join(os.environ["RUNNER_TEMP"], "trim_form.xlsx")
+          warnings = []
+
+          try:
+              convert(xlsform=xlsform, validate=False, warnings=warnings)
+          except PyXFormError as e:
+              for w in warnings:
+                  print(f"WARNING: {w}")
+              print(f"ERROR: {e}", file=sys.stderr)
+              sys.exit(1)
+
+          for w in warnings:
+              print(f"WARNING: {w}", file=sys.stderr)
+
+          if warnings:
+              sys.exit(1)
+          else:
+              print("OK — no issues found.")
+          PYEOF
+
+      - name: Regenerate msna_template_required
+        run: Rscript -e "devtools::load_all(); source('data-raw/msna_template_required.R')"
+
+      - name: Check generated data in sync with form.xlsx
+        run: git diff --exit-code data/
