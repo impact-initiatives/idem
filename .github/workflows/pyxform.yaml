@@ -1,4 +1,4 @@
-name: pyxform
+name: msna_template_validation
 
 on:
   push:
