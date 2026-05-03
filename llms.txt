@@ -9,6 +9,7 @@ before it causes problems in data collection or analysis.
 ## Installation
 
 ``` r
+
 # install.packages("pak")
 pak::pak("impact-initiatives/idem@v2026.4.27")
 ```
@@ -27,18 +28,19 @@ carry extra content; it must not be missing anything `target` requires.
 
 ## The checks
 
-| Check               | What is tested                                                                                                     |
-|---------------------|--------------------------------------------------------------------------------------------------------------------|
-| `question_names`    | Every question name in `target` must exist in `dev`.                                                               |
-| `list_names`        | Every choice list *defined* in `target`’s choices sheet must also be defined in `dev`’s choices sheet.             |
+| Check | What is tested |
+|----|----|
+| `question_names` | Every question name in `target` must exist in `dev`. |
+| `list_names` | Every choice list *defined* in `target`’s choices sheet must also be defined in `dev`’s choices sheet. |
 | `survey_list_names` | Every choice list *referenced* by `target`’s survey questions must also be referenced in `dev`’s survey questions. |
-| `choices`           | For every shared list, every choice option in `target` must exist in the same list in `dev`.                       |
+| `choices` | For every shared list, every choice option in `target` must exist in the same list in `dev`. |
 
 All checks return a tidy tibble — one row per issue.
 
 ## Quick start
 
 ``` r
+
 library(idem)
 
 # load both forms

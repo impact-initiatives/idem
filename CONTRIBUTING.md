@@ -100,6 +100,7 @@ gitGraph
 Fork the repository and clone it locally. The easiest way is:
 
 ``` r
+
 usethis::create_from_github("impact-initiatives/idem", fork = TRUE)
 ```
 
@@ -114,6 +115,7 @@ git remote add upstream https://github.com/impact-initiatives/idem.git
 ### 2. Install dependencies and verify the baseline
 
 ``` r
+
 devtools::install_dev_deps()
 devtools::check()
 ```
@@ -147,6 +149,7 @@ PRs](https://code-review.tidyverse.org/author/focused.html).
 When ready, push and open a PR:
 
 ``` r
+
 usethis::pr_push()
 ```
 
@@ -179,6 +182,7 @@ activate the hooks from R. Run the following in an R session from the
 root of the cloned repository:
 
 ``` r
+
 install.packages("precommit")
 precommit::use_precommit()
 ```
@@ -219,25 +223,25 @@ pre-commit run lintr --all-files
 
 ### Hook reference
 
-| Hook                      | What it checks / does                                                                                                     |
-|---------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| `roxygenize`              | Rebuilds `man/` and `NAMESPACE` from roxygen2 tags                                                                        |
-| `use-tidy-description`    | Sorts and normalises `DESCRIPTION` fields                                                                                 |
-| `spell-check`             | Spell-checks documentation and vignettes                                                                                  |
-| `lintr`                   | Lints R source for style and potential issues                                                                             |
-| `readme-rmd-rendered`     | Ensures `README.md` is up-to-date with `README.Rmd`                                                                       |
-| `parsable-R`              | Verifies all `.R` files parse without error                                                                               |
-| `no-browser-statement`    | Blocks accidental [`browser()`](https://rdrr.io/r/base/browser.html) calls                                                |
-| `no-print-statement`      | Blocks accidental [`print()`](https://rdrr.io/r/base/print.html) calls                                                    |
-| `no-debug-statement`      | Blocks accidental [`debug()`](https://rdrr.io/r/base/debug.html)/[`debugonce()`](https://rdrr.io/r/base/debug.html) calls |
-| `deps-in-desc`            | Ensures every used package is declared in `DESCRIPTION`                                                                   |
-| `pkgdown`                 | Validates the pkgdown site configuration                                                                                  |
-| `check-added-large-files` | Blocks files larger than 200 KB                                                                                           |
-| `file-contents-sorter`    | Keeps `.Rbuildignore` entries sorted                                                                                      |
-| `end-of-file-fixer`       | Ensures files end with a newline                                                                                          |
-| `air-format`              | Auto-formats R code to the tidyverse style via Air                                                                        |
-| `conventional-pre-commit` | Enforces Conventional Commits format on commit messages                                                                   |
-| `forbid-to-commit`        | Blocks `.Rhistory`, `.RData`, `.Rds`, `.rds` files                                                                        |
+| Hook | What it checks / does |
+|----|----|
+| `roxygenize` | Rebuilds `man/` and `NAMESPACE` from roxygen2 tags |
+| `use-tidy-description` | Sorts and normalises `DESCRIPTION` fields |
+| `spell-check` | Spell-checks documentation and vignettes |
+| `lintr` | Lints R source for style and potential issues |
+| `readme-rmd-rendered` | Ensures `README.md` is up-to-date with `README.Rmd` |
+| `parsable-R` | Verifies all `.R` files parse without error |
+| `no-browser-statement` | Blocks accidental [`browser()`](https://rdrr.io/r/base/browser.html) calls |
+| `no-print-statement` | Blocks accidental [`print()`](https://rdrr.io/r/base/print.html) calls |
+| `no-debug-statement` | Blocks accidental [`debug()`](https://rdrr.io/r/base/debug.html)/[`debugonce()`](https://rdrr.io/r/base/debug.html) calls |
+| `deps-in-desc` | Ensures every used package is declared in `DESCRIPTION` |
+| `pkgdown` | Validates the pkgdown site configuration |
+| `check-added-large-files` | Blocks files larger than 200 KB |
+| `file-contents-sorter` | Keeps `.Rbuildignore` entries sorted |
+| `end-of-file-fixer` | Ensures files end with a newline |
+| `air-format` | Auto-formats R code to the tidyverse style via Air |
+| `conventional-pre-commit` | Enforces Conventional Commits format on commit messages |
+| `forbid-to-commit` | Blocks `.Rhistory`, `.RData`, `.Rds`, `.rds` files |
 
 ### Commit message format
 
@@ -284,6 +288,7 @@ Commits that do not follow this format will be rejected by the hook.
 - To lint R source files:
 
   ``` r
+
   lintr::lint_package()
   ```
 
@@ -294,6 +299,7 @@ Commits that do not follow this format will be rejected by the hook.
   docs:
 
   ``` r
+
   devtools::document()
   ```
 

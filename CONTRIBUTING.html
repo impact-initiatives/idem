@@ -153,43 +153,43 @@
 </div>
 <div class="section level3">
 <h3 id="hook-reference">Hook reference<a class="anchor" aria-label="anchor" href="#hook-reference"></a></h3>
-<table class="table"><colgroup><col width="50%"><col width="50%"></colgroup><thead><tr class="header"><th>Hook</th>
+<table class="table"><colgroup><col width="50%"><col width="50%"></colgroup><thead><tr><th>Hook</th>
 <th>What it checks / does</th>
-</tr></thead><tbody><tr class="odd"><td><code>roxygenize</code></td>
+</tr></thead><tbody><tr><td><code>roxygenize</code></td>
 <td>Rebuilds <code>man/</code> and <code>NAMESPACE</code> from roxygen2 tags</td>
-</tr><tr class="even"><td><code>use-tidy-description</code></td>
+</tr><tr><td><code>use-tidy-description</code></td>
 <td>Sorts and normalises <code>DESCRIPTION</code> fields</td>
-</tr><tr class="odd"><td><code>spell-check</code></td>
+</tr><tr><td><code>spell-check</code></td>
 <td>Spell-checks documentation and vignettes</td>
-</tr><tr class="even"><td><code>lintr</code></td>
+</tr><tr><td><code>lintr</code></td>
 <td>Lints R source for style and potential issues</td>
-</tr><tr class="odd"><td><code>readme-rmd-rendered</code></td>
+</tr><tr><td><code>readme-rmd-rendered</code></td>
 <td>Ensures <code>README.md</code> is up-to-date with <code>README.Rmd</code>
 </td>
-</tr><tr class="even"><td><code>parsable-R</code></td>
+</tr><tr><td><code>parsable-R</code></td>
 <td>Verifies all <code>.R</code> files parse without error</td>
-</tr><tr class="odd"><td><code>no-browser-statement</code></td>
+</tr><tr><td><code>no-browser-statement</code></td>
 <td>Blocks accidental <code><a href="https://rdrr.io/r/base/browser.html" class="external-link">browser()</a></code> calls</td>
-</tr><tr class="even"><td><code>no-print-statement</code></td>
+</tr><tr><td><code>no-print-statement</code></td>
 <td>Blocks accidental <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> calls</td>
-</tr><tr class="odd"><td><code>no-debug-statement</code></td>
+</tr><tr><td><code>no-debug-statement</code></td>
 <td>Blocks accidental <code><a href="https://rdrr.io/r/base/debug.html" class="external-link">debug()</a></code>/<code><a href="https://rdrr.io/r/base/debug.html" class="external-link">debugonce()</a></code> calls</td>
-</tr><tr class="even"><td><code>deps-in-desc</code></td>
+</tr><tr><td><code>deps-in-desc</code></td>
 <td>Ensures every used package is declared in <code>DESCRIPTION</code>
 </td>
-</tr><tr class="odd"><td><code>pkgdown</code></td>
+</tr><tr><td><code>pkgdown</code></td>
 <td>Validates the pkgdown site configuration</td>
-</tr><tr class="even"><td><code>check-added-large-files</code></td>
+</tr><tr><td><code>check-added-large-files</code></td>
 <td>Blocks files larger than 200 KB</td>
-</tr><tr class="odd"><td><code>file-contents-sorter</code></td>
+</tr><tr><td><code>file-contents-sorter</code></td>
 <td>Keeps <code>.Rbuildignore</code> entries sorted</td>
-</tr><tr class="even"><td><code>end-of-file-fixer</code></td>
+</tr><tr><td><code>end-of-file-fixer</code></td>
 <td>Ensures files end with a newline</td>
-</tr><tr class="odd"><td><code>air-format</code></td>
+</tr><tr><td><code>air-format</code></td>
 <td>Auto-formats R code to the tidyverse style via Air</td>
-</tr><tr class="even"><td><code>conventional-pre-commit</code></td>
+</tr><tr><td><code>conventional-pre-commit</code></td>
 <td>Enforces Conventional Commits format on commit messages</td>
-</tr><tr class="odd"><td><code>forbid-to-commit</code></td>
+</tr><tr><td><code>forbid-to-commit</code></td>
 <td>Blocks <code>.Rhistory</code>, <code>.RData</code>, <code>.Rds</code>, <code>.rds</code> files</td>
 </tr></tbody></table></div>
 <div class="section level3">
@@ -197,19 +197,19 @@
 <p>The <code>conventional-pre-commit</code> hook enforces the <a href="https://www.conventionalcommits.org/" class="external-link">Conventional Commits</a> specification. Every commit message must start with a type prefix:</p>
 <pre><code>type: short description in the imperative mood</code></pre>
 <p>Types used in this repository:</p>
-<table class="table"><colgroup><col width="50%"><col width="50%"></colgroup><thead><tr class="header"><th>Type</th>
+<table class="table"><colgroup><col width="50%"><col width="50%"></colgroup><thead><tr><th>Type</th>
 <th>When to use</th>
-</tr></thead><tbody><tr class="odd"><td><code>feat</code></td>
+</tr></thead><tbody><tr><td><code>feat</code></td>
 <td>A new feature or behaviour</td>
-</tr><tr class="even"><td><code>fix</code></td>
+</tr><tr><td><code>fix</code></td>
 <td>A bug fix</td>
-</tr><tr class="odd"><td><code>docs</code></td>
+</tr><tr><td><code>docs</code></td>
 <td>Documentation changes only</td>
-</tr><tr class="even"><td><code>refactor</code></td>
+</tr><tr><td><code>refactor</code></td>
 <td>Code change that neither fixes a bug nor adds a feature</td>
-</tr><tr class="odd"><td><code>test</code></td>
+</tr><tr><td><code>test</code></td>
 <td>Adding or updating tests</td>
-</tr><tr class="even"><td><code>chore</code></td>
+</tr><tr><td><code>chore</code></td>
 <td>Maintenance tasks (dependency updates, config changes, etc.)</td>
 </tr></tbody></table><p>Example: <code>feat: add validate_choices() function</code></p>
 <p>Commits that do not follow this format will be rejected by the hook.</p>

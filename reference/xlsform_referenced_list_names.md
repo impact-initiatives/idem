@@ -32,14 +32,14 @@ A character vector of unique list names referenced in the survey.
 
 ## Details
 
-|                            |                                  |                     |
-|----------------------------|----------------------------------|---------------------|
-| Question type              | Example type value               | Extracted list name |
-| `select_one`               | `select_one yn`                  | `yn`                |
-| `select_multiple`          | `select_multiple colors`         | `colors`            |
-| `select_one_external`      | `select_one_external regions`    | `regions`           |
-| `select_multiple_external` | `select_multiple_external items` | `items`             |
-| `rank`                     | `rank priority`                  | `priority`          |
+|  |  |  |
+|----|----|----|
+| Question type | Example type value | Extracted list name |
+| `select_one` | `select_one yn` | `yn` |
+| `select_multiple` | `select_multiple colors` | `colors` |
+| `select_one_external` | `select_one_external regions` | `regions` |
+| `select_multiple_external` | `select_multiple_external items` | `items` |
+| `rank` | `rank priority` | `priority` |
 
 `select_one_from_file` and `select_multiple_from_file` are excluded
 because they reference external CSV/XML/GeoJSON files rather than any

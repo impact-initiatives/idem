@@ -52,13 +52,13 @@ single tibble.
 
 ### Available checks
 
-|                       |                                                                                                                  |
-|-----------------------|------------------------------------------------------------------------------------------------------------------|
-| Check name            | What it tests                                                                                                    |
-| `"question_names"`    | Every question name in `target` must exist in `dev`.                                                             |
-| `"list_names"`        | Every list name *defined* in `target`'s choices sheet must also be defined in `dev`'s choices sheet.             |
+|  |  |
+|----|----|
+| Check name | What it tests |
+| `"question_names"` | Every question name in `target` must exist in `dev`. |
+| `"list_names"` | Every list name *defined* in `target`'s choices sheet must also be defined in `dev`'s choices sheet. |
 | `"survey_list_names"` | Every list name *referenced* in `target`'s survey questions must also be referenced in `dev`'s survey questions. |
-| `"choices"`           | For every shared list, every choice option in `target` must exist in the same list in `dev`.                     |
+| `"choices"` | For every shared list, every choice option in `target` must exist in the same list in `dev`. |
 
 ### Return value structure
 
