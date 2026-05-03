@@ -71,19 +71,15 @@ hooks-update:
 data:
     Rscript -e "devtools::load_all(); source('data-raw/msna_template_required.R')"
 
-# Download the MSNA form from SharePoint into inst/extdata/form.xlsx
-fetch-form:
-    rclone copyto "Sharepoint:MSNA_2026_KOBO_Form_20260331.xlsx" inst/extdata/form.xlsx
+# ── Validation ────────────────────────────────────────────────────────────────
 
-# Download the MSNA indicator bank from hppu into inst/extdata/indicator_bank.xlsx
-fetch-ib:
-    rclone copyto "hppu:04. Indicator bank and sectoral guidance/2026_MSNA_IndicatorBank_20260324.xlsx" inst/extdata/indicator_bank.xlsx
+# Validate form.xlsx: pyxform check, trim + other_ coverage, trim pyxform check (mirrors CI)
+val:
+    uv run python tools/validate_xlsform.py inst/extdata/form.xlsx
+    Rscript tools/trim_xlsform.R
+    uv run python tools/validate_xlsform.py inst/extdata/form_required.xlsx
 
 # ── Compound workflows ────────────────────────────────────────────────────────
 
 # Regenerate docs + README, then run full check
 ci: doc readme check
-
-val:
-    arf -e "source('data-raw/trim.R')"
-    uvx --from pyxform xls2xform "inst/extdata/trim_form.xlsx"  2>&1

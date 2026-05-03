@@ -15,6 +15,7 @@ af
 afaf
 Affero
 arf
+arg
 aut
 autoupdate
 bb
@@ -56,6 +57,7 @@ de
 dea
 ded
 defusedxml
+deps
 desc
 dev
 dev's
@@ -75,6 +77,7 @@ eed
 eeec
 ef
 english
+env
 et
 extdata
 fafb
@@ -99,6 +102,7 @@ gsk
 gz
 handwashing
 hardcoded
+heredocs
 hh
 hlp
 hppu

@@ -13,4 +13,5 @@
 ^pkgdown$
 ^renv$
 ^renv\.lock$
+^tools$
 ^vignettes/articles$

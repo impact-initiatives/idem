@@ -58,8 +58,8 @@ renv.lock
 
 # Generated artifacts
 report.xlsx
-inst/extdata/trim_form.xlsx
-inst/extdata/trim_form.xml
+inst/extdata/form_required.xlsx
+inst/extdata/form_required.xml
 
 # Scratch files
 foo.R
