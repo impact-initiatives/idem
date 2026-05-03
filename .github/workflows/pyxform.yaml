@@ -1,0 +1,49 @@
+name: pyxform
+
+on:
+  push:
+    paths:
+      - "inst/extdata/form.xlsx"
+  pull_request:
+    paths:
+      - "inst/extdata/form.xlsx"
+
+env:
+  XLSFORM_PATH: "inst/extdata/form.xlsx"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Run pyxform validation
+        run: |
+          uv run --with pyxform python - <<'PYEOF'
+          import os, sys
+          from pyxform.xls2xform import convert
+          from pyxform.errors import PyXFormError
+
+          xlsform = os.environ["XLSFORM_PATH"]
+          warnings = []
+
+          try:
+              convert(xlsform=xlsform, validate=False, warnings=warnings)
+          except PyXFormError as e:
+              for w in warnings:
+                  print(f"WARNING: {w}")
+              print(f"ERROR: {e}", file=sys.stderr)
+              sys.exit(1)
+
+          for w in warnings:
+              print(f"WARNING: {w}", file=sys.stderr)
+
+          if warnings:
+              sys.exit(1)
+          else:
+              print("OK — no issues found.")
+          PYEOF
