@@ -18,9 +18,13 @@ env:
   XLSFORM_PATH: ${{ inputs.xlsform_path || 'inst/extdata/form.xlsx' }}
   UV_LINK_MODE: copy
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v6
@@ -42,7 +46,7 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::devtools, any::openxlsx2
+          extra-packages: any::pkgload, any::openxlsx2
           needs: Imports
 
       - name: Trim form and check other_ coverage
@@ -54,7 +58,7 @@ jobs:
       - name: Regenerate msna_template_required
         run: |
           echo "::group::devtools output"
-          Rscript -e "devtools::load_all(); source('data-raw/msna_template_required.R')"
+          Rscript -e "pkgload::load_all(); source('data-raw/msna_template_required.R')"
           echo "::endgroup::"
 
       - name: Check generated data in sync with form.xlsx
