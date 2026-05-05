@@ -3,7 +3,7 @@
 ## Generates R-package NEWS.md format from conventional commits.
 ##
 ## Usage (run from repo root, after tagging):
-##   npx git-cliff --unreleased --tag v<VERSION> --prepend NEWS.md
+##   uvx git-cliff --unreleased --tag v<VERSION> --prepend NEWS.md
 
 [changelog]
 header = ""

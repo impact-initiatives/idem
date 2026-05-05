@@ -83,7 +83,7 @@ check-form:
 
 # Prepend a NEWS.md entry for VERSION from unreleased commits (e.g. `just news 2026.5.5`)
 news version:
-    npx git-cliff --unreleased --tag v{{ version }} --prepend NEWS.md
+    uvx git-cliff --unreleased --tag v{{ version }} --prepend NEWS.md
 
 # ── Compound workflows ────────────────────────────────────────────────────────
 
