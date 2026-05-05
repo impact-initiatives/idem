@@ -78,8 +78,11 @@ eec
 eed
 eeec
 ef
+endfor
+endif
 english
 env
+erge
 et
 extdata
 fafb
@@ -139,15 +142,18 @@ noncommercially
 NONINFRINGEMENT
 normalises
 nourriture
+npx
 observability
 openpyxl
 option’
+parsers
 pkgdown
 pkgload
 pos
 pre
 precommit
 prek
+preprocessors
 prot
 PRs
 purrr
@@ -174,6 +180,7 @@ roxygen
 RoxygenNote
 Rscript
 RStudio
+runnable
 scale’
 sdist
 sectoral
@@ -183,6 +190,7 @@ sha
 Sharepoint
 snfi
 stringr
+striptags
 styler
 sublicense
 sublicenses

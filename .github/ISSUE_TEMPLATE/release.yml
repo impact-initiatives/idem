@@ -33,89 +33,117 @@ body:
 
         - [ ] Open this issue first — you need its number for the next step
         - [ ] Create `release/v<VERSION>` linked to this issue and check it out
-              ```sh
-              gh issue develop <ISSUE_NUMBER> \
-                --name release/v<VERSION> \
-                --base main \
-                --checkout
-              ```
-              This creates the branch on GitHub, links it to the issue's Development panel, and checks it out locally.
-              (`usethis::pr_init()` creates a branch too but cannot link it to an issue — use `gh` here.)
+
+          ```sh
+          gh issue develop <ISSUE_NUMBER> \
+            --name release/v<VERSION> \
+            --base main \
+            --checkout
+          ```
+
+          This creates the branch on GitHub, links it to the issue's Development panel, and checks it out locally.
 
         ---
 
-        ### 2 · Bump the version and update the changelog
+        ### 2 · Generate the changelog
 
-        - [ ] Set the version in `DESCRIPTION` (CalVer: today's date, no zero-padding)
-              ```r
-              desc::desc_set_version("<VERSION>")
-              ```
-        - [ ] Generate the `NEWS.md` entry from conventional commits
-              ```sh
-              just news <VERSION>
-              ```
-              Prepends a `# idem <VERSION>` section to `NEWS.md` grouped by type.
-              Commits with scope `form.xlsx` are pulled into a dedicated **MSNA template** section at the top.
-              Review and edit the draft before committing — cliff output is a starting point, not final copy.
-        - [ ] Commit: `chore(release): bump version to <VERSION>`
+        - [ ] Generate the `NEWS.md` entry
+
+          ```sh
+          just news <VERSION>
+          ```
+
+          Prepends a `# idem <VERSION>` section to `NEWS.md` grouped by type. Commits with scope `form.xlsx` are pulled into a dedicated **MSNA template** section at the top. Review and edit the draft before committing — cliff output is a starting point, not final copy.
+
+        - [ ] Commit: `chore(release): update NEWS.md for <VERSION>`
 
         ---
 
         ### 3 · Polish and verify
 
         - [ ] Regenerate documentation
-              ```r
-              devtools::document()
-              ```
+
+          ```r
+          devtools::document()
+          ```
+
         - [ ] Run R CMD check — **0 errors, 0 warnings, 0 notes** required
-              ```r
-              devtools::check()
-              ```
-        - [ ] Rebuild `README.md` if `README.Rmd` has changed
-              ```r
-              devtools::build_readme()
-              ```
+
+          ```r
+          devtools::check()
+          ```
+
+        - [ ] Update the installation tag in `README.Rmd` (line 34) to `@v<VERSION>`
+
+          ```r
+          devtools::build_readme()
+          ```
+
         - [ ] Preview the pkgdown site locally
-              ```r
-              pkgdown::build_site()
-              ```
+
+          ```r
+          pkgdown::build_site()
+          ```
+
         - [ ] Commit any changes from the steps above
 
         ---
 
-        ### 4 · Open the pull request
+        ### 4 · Bump the version
 
-        - [ ] Push and open a PR targeting `main`
-              ```r
-              usethis::pr_push()
-              ```
-              Set the PR title to `chore(release): idem v<VERSION>`
+        Last commit on the branch — seals the release.
+
+        - [ ] Set the version in `DESCRIPTION` (CalVer: today's date, bare number)
+
+          ```r
+          desc::desc_set_version("<VERSION>")
+          ```
+
+        - [ ] Commit: `chore(release): bump version to <VERSION>`
+
+        ---
+
+        ### 5 · Open the pull request
+
+        - [ ] Push the branch and open a PR targeting `main`
+
+          ```sh
+          git push -u origin release/v<VERSION>
+          gh pr create \
+            --base main \
+            --title "chore(release): idem v<VERSION>" \
+            --body-file .github/PULL_REQUEST_TEMPLATE/release.md
+          ```
+
+          Fill in the `<ISSUE_NUMBER>` and `<VERSION>` placeholders in the PR body before submitting.
+
         - [ ] All CI checks pass (R CMD check, lint, format)
         - [ ] At least one maintainer has reviewed the PR
         - [ ] Merge into `main` — **merge commit, not squash** (preserves individual conventional commits)
 
         ---
 
-        ### 5 · Tag and publish
+        ### 6 · Tag and publish
 
         - [ ] Pull `main` and create an annotated tag
-              ```sh
-              git checkout main && git pull
-              git tag -a v<VERSION> -m "idem v<VERSION>"
-              git push origin v<VERSION>
-              ```
-        - [ ] Create the GitHub Release from the tag with the `NEWS.md` section as the body
-              ```sh
-              gh release create v<VERSION> \
-                --title "idem v<VERSION>" \
-                --draft
-              ```
-              Opens a draft release in the browser — paste the `# idem <VERSION>` section from `NEWS.md` as the body, then publish.
+
+          ```sh
+          git checkout main && git pull
+          git tag -a v<VERSION> -m "idem v<VERSION>"
+          git push origin v<VERSION>
+          ```
+
+        - [ ] Create a draft GitHub Release and paste the `# idem <VERSION>` section from `NEWS.md` as the body
+
+          ```sh
+          gh release create v<VERSION> --title "idem v<VERSION>" --draft
+          ```
+
         - [ ] Confirm the pkgdown GitHub Pages deploy succeeded (Actions tab)
 
         ---
 
-        ### 6 · Post-release
+        ### 7 · Post-release
 
         - [ ] Close this issue
         - [ ] Announce in the team channel if applicable
