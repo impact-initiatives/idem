@@ -1,3 +1,9 @@
+in_gha <- identical(Sys.getenv("GITHUB_ACTIONS"), "true")
+
+gha_error <- function(msg) {
+  if (in_gha) cat(sprintf("::error::%s\n", msg)) else cat("ERROR:", msg, "\n")
+}
+
 xlsform <- Sys.getenv("XLSFORM_PATH", unset = "inst/extdata/form.xlsx")
 trim_path <- Sys.getenv(
   "REQUIRED_FORM_PATH",
@@ -21,11 +27,10 @@ potential_other <- intersect(paste0("other_", required_names), complete_names)
 missing <- setdiff(potential_other, required_names)
 
 if (length(missing) > 0) {
-  cat(
-    "ERROR: other_ questions in full form missing from required:",
-    paste(missing, collapse = ", "),
-    "\n"
-  )
+  gha_error(paste(
+    "other_ questions in full form missing from required:",
+    paste(missing, collapse = ", ")
+  ))
   quit(status = 1)
 }
 

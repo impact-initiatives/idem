@@ -93,6 +93,7 @@ fmt
 formatter
 fsl
 GeoJSON
+GHA
 ghedamsi
 GHEDAMSI
 gitGraph
