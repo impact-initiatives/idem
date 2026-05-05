@@ -21,15 +21,22 @@ openxlsx2::write_xlsx(
   na = ""
 )
 
-complete_names <- na.omit(unique(survey_full$name))
-required_names <- na.omit(unique(survey_req$name))
-potential_other <- intersect(paste0("other_", required_names), complete_names)
-missing <- setdiff(potential_other, required_names)
+all_question_names <- na.omit(unique(survey_full$name))
+required_question_names <- na.omit(unique(survey_req$name))
 
-if (length(missing) > 0) {
+other_questions_in_full <- union(
+  intersect(paste0("other_", required_question_names), all_question_names),
+  intersect(paste0(required_question_names, "_other"), all_question_names)
+)
+missing_other_questions <- setdiff(
+  other_questions_in_full,
+  required_question_names
+)
+
+if (length(missing_other_questions) > 0) {
   gha_error(paste(
     "other_ questions in full form missing from required:",
-    paste(missing, collapse = ", ")
+    paste(missing_other_questions, collapse = ", ")
   ))
   quit(status = 1)
 }
