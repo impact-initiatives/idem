@@ -41,19 +41,13 @@ body:
             --checkout
           ```
 
-          This creates the branch on GitHub, links it to the issue's Development panel, and checks it out locally. (`usethis::pr_init()` creates a branch too but cannot link it to an issue — use `gh` here.)
+          This creates the branch on GitHub, links it to the issue's Development panel, and checks it out locally.
 
         ---
 
-        ### 2 · Bump the version and update the changelog
+        ### 2 · Generate the changelog
 
-        - [ ] Set the version in `DESCRIPTION` (CalVer: today's date, no zero-padding)
-
-          ```r
-          desc::desc_set_version("<VERSION>")
-          ```
-
-        - [ ] Generate the `NEWS.md` entry from conventional commits
+        - [ ] Generate the `NEWS.md` entry
 
           ```sh
           just news <VERSION>
@@ -61,7 +55,7 @@ body:
 
           Prepends a `# idem <VERSION>` section to `NEWS.md` grouped by type. Commits with scope `form.xlsx` are pulled into a dedicated **MSNA template** section at the top. Review and edit the draft before committing — cliff output is a starting point, not final copy.
 
-        - [ ] Commit: `chore(release): bump version to <VERSION>`
+        - [ ] Commit: `chore(release): update NEWS.md for <VERSION>`
 
         ---
 
@@ -79,7 +73,7 @@ body:
           devtools::check()
           ```
 
-        - [ ] Rebuild `README.md` if `README.Rmd` has changed
+        - [ ] Update the installation tag in `README.Rmd` (line 34) to `@v<VERSION>`
 
           ```r
           devtools::build_readme()
@@ -95,7 +89,21 @@ body:
 
         ---
 
-        ### 4 · Open the pull request
+        ### 4 · Bump the version
+
+        Last commit on the branch — seals the release.
+
+        - [ ] Set the version in `DESCRIPTION` (CalVer: today's date, bare number)
+
+          ```r
+          desc::desc_set_version("<VERSION>")
+          ```
+
+        - [ ] Commit: `chore(release): bump version to <VERSION>`
+
+        ---
+
+        ### 5 · Open the pull request
 
         - [ ] Push and open a PR targeting `main`
 
@@ -111,7 +119,7 @@ body:
 
         ---
 
-        ### 5 · Tag and publish
+        ### 6 · Tag and publish
 
         - [ ] Pull `main` and create an annotated tag
 
@@ -131,7 +139,7 @@ body:
 
         ---
 
-        ### 6 · Post-release
+        ### 7 · Post-release
 
         - [ ] Close this issue
         - [ ] Announce in the team channel if applicable
