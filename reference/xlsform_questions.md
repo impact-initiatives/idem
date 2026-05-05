@@ -341,7 +341,7 @@ xlsform_questions(form)
 #> [289] "wash_drinking_water_person_trips"                          
 #> [290] "wash_drinking_water_piped_supply"                          
 #> [291] "wash_water_availability_yn"                                
-#> [292] "wash_water_availability_yn"                                
+#> [292] "wash_water_availability_issue"                             
 #> [293] "other_wash_water_availability_issue"                       
 #> [294] "wash_drinking_water_supplied_hours"                        
 #> [295] "wash_drinking_water_days_unavailable"                      
