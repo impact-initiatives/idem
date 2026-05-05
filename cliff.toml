@@ -38,16 +38,19 @@ commit_preprocessors = [
 
 commit_parsers = [
     { message = "^[Mm]erge",        skip = true },
+    { message = "\\(release\\)",     skip = true },
+    { message = "\\(ci\\)",          skip = true },
+    { message = "\\(tools\\)",       skip = true },
     { message = "\\(form\\.xlsx\\)", group = "<00>MSNA template" },
     { message = "^feat",             group = "<01>New features" },
-    { message = "^fix",       group = "<02>Bug fixes" },
-    { message = "^docs",      group = "<03>Documentation" },
-    { message = "^refactor",  group = "<04>Refactoring" },
-    { message = "^test",      group = "<05>Testing" },
-    { message = "^chore",     group = "<06>Chores" },
-    { message = "^ci",        group = "<06>Chores" },
-    { message = "^build",     group = "<06>Chores" },
-    { message = ".*",         group = "<07>Other" },
+    { message = "^fix",              group = "<02>Bug fixes" },
+    { message = "^docs",             group = "<03>Documentation" },
+    { message = "^refactor",         group = "<04>Refactoring" },
+    { message = "^test",             group = "<05>Testing" },
+    { message = "^chore",            skip = true },
+    { message = "^ci",               skip = true },
+    { message = "^build",            skip = true },
+    { message = ".*",                skip = true },
 ]
 
 ## Exclude commits not matched by any parser.
