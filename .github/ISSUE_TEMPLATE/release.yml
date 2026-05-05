@@ -105,13 +105,17 @@ body:
 
         ### 5 · Open the pull request
 
-        - [ ] Push and open a PR targeting `main`
+        - [ ] Push the branch and open a PR targeting `main`
 
-          ```r
-          usethis::pr_push()
+          ```sh
+          git push -u origin release/v<VERSION>
+          gh pr create \
+            --base main \
+            --title "chore(release): idem v<VERSION>" \
+            --body-file .github/PULL_REQUEST_TEMPLATE/release.md
           ```
 
-          Set the PR title to `chore(release): idem v<VERSION>`
+          Fill in the `<ISSUE_NUMBER>` and `<VERSION>` placeholders in the PR body before submitting.
 
         - [ ] All CI checks pass (R CMD check, lint, format)
         - [ ] At least one maintainer has reviewed the PR
