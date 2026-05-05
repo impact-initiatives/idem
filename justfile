@@ -85,6 +85,11 @@ check-form:
 news version:
     uvx git-cliff --unreleased --tag v{{ version }} --prepend NEWS.md
 
+# Create a draft GitHub release for VERSION with notes from git-cliff (e.g. `just release 2026.5.5`)
+release version:
+    uvx git-cliff --latest --strip header \
+      | gh release create v{{ version }} --title "idem v{{ version }}" --draft --notes-file -
+
 # ── Compound workflows ────────────────────────────────────────────────────────
 
 # Regenerate docs + README, then run full check

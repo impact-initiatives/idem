@@ -133,10 +133,10 @@ body:
           git push origin v<VERSION>
           ```
 
-        - [ ] Create a draft GitHub Release and paste the `# idem <VERSION>` section from `NEWS.md` as the body
+        - [ ] Create a draft GitHub Release — release notes generated from git-cliff
 
           ```sh
-          gh release create v<VERSION> --title "idem v<VERSION>" --draft
+          just release <VERSION>
           ```
 
         - [ ] Confirm the pkgdown GitHub Pages deploy succeeded (Actions tab)
