@@ -79,6 +79,12 @@ check-form:
     Rscript tools/trim_xlsform.R
     uv run python tools/validate_xlsform.py inst/extdata/form_required.xlsx
 
+# ── Release ───────────────────────────────────────────────────────────────────
+
+# Prepend a NEWS.md entry for VERSION from unreleased commits (e.g. `just news 2026.5.5`)
+news version:
+    npx git-cliff --unreleased --tag v{{ version }} --prepend NEWS.md
+
 # ── Compound workflows ────────────────────────────────────────────────────────
 
 # Regenerate docs + README, then run full check

@@ -1,0 +1,58 @@
+## cliff.toml — git-cliff configuration for idem
+##
+## Generates R-package NEWS.md format from conventional commits.
+##
+## Usage (run from repo root, after tagging):
+##   npx git-cliff --unreleased --tag v<VERSION> --prepend NEWS.md
+
+[changelog]
+header = ""
+body = """
+# idem {{ version | trim_start_matches(pat="v") }}
+
+{% for group, commits in commits | group_by(attribute="group") -%}
+## {{ group | striptags | trim }}
+
+{% for commit in commits -%}
+* {% if commit.scope %}**{{ commit.scope }}**: {% endif -%}
+{{ commit.message | upper_first }}{% if commit.breaking %} (**breaking change**){% endif %}
+{% endfor %}
+{% endfor %}
+"""
+trim = true
+
+[git]
+conventional_commits = true
+## Non-conventional commits are excluded — the pre-commit hook enforces the format.
+filter_unconventional = true
+split_commits = false
+
+commit_preprocessors = [
+    ## Strip PR merge dividers
+    { pattern = "---------", replace = "" },
+    ## Collapse multiple spaces
+    { pattern = " +", replace = " " },
+    ## Link GitHub PRs: (#123) → (#123) — kept as plain text for NEWS.md
+    ## (R NEWS.md does not render markdown links on CRAN, so no hyperlinking)
+]
+
+commit_parsers = [
+    { message = "^[Mm]erge",        skip = true },
+    { message = "\\(form\\.xlsx\\)", group = "<00>MSNA template" },
+    { message = "^feat",             group = "<01>New features" },
+    { message = "^fix",       group = "<02>Bug fixes" },
+    { message = "^docs",      group = "<03>Documentation" },
+    { message = "^refactor",  group = "<04>Refactoring" },
+    { message = "^test",      group = "<05>Testing" },
+    { message = "^chore",     group = "<06>Chores" },
+    { message = "^ci",        group = "<06>Chores" },
+    { message = "^build",     group = "<06>Chores" },
+    { message = ".*",         group = "<07>Other" },
+]
+
+## Exclude commits not matched by any parser.
+filter_commits = true
+## Commits within each section ordered oldest-first.
+sort_commits = "oldest"
+## Only consider tags on the current branch.
+use_branch_tags = true

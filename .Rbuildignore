@@ -6,12 +6,16 @@
 ^\.github$
 ^\.lintr$
 ^\.pre-commit-config\.yaml$
+^\.venv$
 ^_pkgdown\.yml$
+^cliff\.toml$
 ^data-raw$
 ^docs$
 ^justfile$
 ^pkgdown$
+^pyproject\.toml$
 ^renv$
 ^renv\.lock$
 ^tools$
+^uv\.lock$
 ^vignettes/articles$
