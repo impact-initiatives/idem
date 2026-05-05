@@ -31,6 +31,7 @@ behaviour
 bfe
 bffeef
 caa
+CalVer
 cb
 cbba
 cbd
@@ -41,6 +42,7 @@ cd
 cdaedb
 ce
 ceb
+changelog
 checkUsage
 ci
 cli
@@ -93,6 +95,7 @@ fmt
 formatter
 fsl
 GeoJSON
+gh
 GHA
 ghedamsi
 GHEDAMSI
@@ -211,3 +214,4 @@ xlsx
 xmlfile
 yn
 yn'
+YYYY
