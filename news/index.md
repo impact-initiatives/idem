@@ -1,5 +1,19 @@
 # Changelog
 
+## idem 2026.5.5
+
+### MSNA template
+
+- Bundled reference template updated to `MSNA_2026_KOBO_Form_20260501`,
+  then `MSNA_2026_KOBO_Form_20260504`.
+- Fixed required variable references in the bundled template.
+
+### Bug fixes
+
+- [`validate_xlsform()`](https://impact-initiatives.github.io/idem/reference/validate_xlsform.md)
+  now correctly detects trim violations for both `other_X` and `X_other`
+  column naming patterns.
+
 ## idem 2026.4.27
 
 - First release. Version tied to the MSNA 2026 XLSForm template

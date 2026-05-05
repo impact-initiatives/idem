@@ -12,3 +12,7 @@ Useful links:
 ## Author
 
 **Maintainer**: Iyed GHEDAMSI <iyed.ghedamsi@impact-initiatives.org>
+
+Authors:
+
+- Iyed GHEDAMSI <iyed.ghedamsi@impact-initiatives.org>

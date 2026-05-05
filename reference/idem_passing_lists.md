@@ -13,10 +13,6 @@ and
 idem_passing_lists
 ```
 
-## Format
-
-An object of class `character` of length 4.
-
 ## Examples
 
 ``` r
