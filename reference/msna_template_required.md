@@ -87,7 +87,7 @@ An `xlsform` object — a named list of two tibbles with class
 
   Additional XLSForm parameters.
 
-**`choices`** — 2483 rows × 8 columns: \# nolint: line_length_linter.
+**`choices`** — 2484 rows × 8 columns: \# nolint: line_length_linter.
 
 - list_name:
 
@@ -149,7 +149,7 @@ release.
 msna_template_required
 #> <xlsform> NA
 #> • survey: 313 rows
-#> • choices: 2483 rows
+#> • choices: 2484 rows
 
 xlsform_questions(msna_template_required)
 #>   [1] "audit"                                                     
@@ -466,5 +466,5 @@ xlsform_questions(msna_template_required)
 #> [312] "consented"                                                 
 
 attr(msna_template_required, "version")
-#> [1] "2026.5.5"
+#> [1] "2026.5.6"
 ```

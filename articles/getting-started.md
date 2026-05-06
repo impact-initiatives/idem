@@ -17,7 +17,7 @@ validated — you do not need to load the template separately.
 msna_template_required
 #> <xlsform> NA
 #> • survey: 313 rows
-#> • choices: 2483 rows
+#> • choices: 2484 rows
 ```
 
 ``` r
