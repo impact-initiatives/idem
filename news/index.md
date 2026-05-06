@@ -1,5 +1,12 @@
 # Changelog
 
+## idem 2026.5.6
+
+### MSNA template
+
+- Fixed skip logic syntax for `prot_concern_freq_gbv_areas` and
+  `prot_concern_freq_gbv_areas_type` GBV questions.
+
 ## idem 2026.5.5
 
 ### MSNA template

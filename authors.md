@@ -7,12 +7,12 @@
 ## Citation
 
 GHEDAMSI I (2026). *idem: XLSForm Comparison and Validation*. R package
-version 2026.5.5, <https://impact-initiatives.github.io/idem/>.
+version 2026.5.6, <https://impact-initiatives.github.io/idem/>.
 
     @Manual{,
       title = {idem: XLSForm Comparison and Validation},
       author = {Iyed GHEDAMSI},
       year = {2026},
-      note = {R package version 2026.5.5},
+      note = {R package version 2026.5.6},
       url = {https://impact-initiatives.github.io/idem/},
     }
