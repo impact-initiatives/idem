@@ -1,9 +1,9 @@
 #' Get container row identifiers from an XLSForm
 #'
 #' Returns `"type:name"` identifiers for structural container rows — those
-#' whose `type` starts with `"begin_"` or `"end_"` (e.g. `begin_group`,
-#' `end_group`, `begin_repeat`, `end_repeat`). Rows where `name` is `NA` are
-#' excluded.
+#' whose `type` starts with `"begin"` or `"end"` followed by an underscore or
+#' space (e.g. `begin_group`, `begin group`, `end_repeat`, `end repeat`). Rows
+#' where `name` is `NA` are excluded.
 #'
 #' Because XLSForm requires `begin_X` and `end_X` pairs to share the same
 #' `name`, bare names are ambiguous for comparison. Using `"type:name"` makes

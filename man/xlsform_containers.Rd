@@ -22,9 +22,9 @@ A character vector of \code{"type:name"} identifiers for container rows.
 }
 \description{
 Returns \code{"type:name"} identifiers for structural container rows — those
-whose \code{type} starts with \code{"begin_"} or \code{"end_"} (e.g. \code{begin_group},
-\code{end_group}, \code{begin_repeat}, \code{end_repeat}). Rows where \code{name} is \code{NA} are
-excluded.
+whose \code{type} starts with \code{"begin"} or \code{"end"} followed by an underscore or
+space (e.g. \code{begin_group}, \verb{begin group}, \code{end_repeat}, \verb{end repeat}). Rows
+where \code{name} is \code{NA} are excluded.
 }
 \details{
 Because XLSForm requires \code{begin_X} and \code{end_X} pairs to share the same

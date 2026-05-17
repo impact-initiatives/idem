@@ -2,8 +2,9 @@
 #'
 #' Returns the values of the `name` column from the `survey` sheet, excluding
 #' rows where `name` is `NA` and structural container rows whose `type` starts
-#' with `"begin_"` or `"end_"` (e.g. `begin_group`, `end_repeat`). Use
-#' [xlsform_containers()] to retrieve those rows as `"type:name"` identifiers.
+#' with `"begin"` or `"end"` followed by an underscore or space (e.g.
+#' `begin_group`, `begin group`, `end_repeat`). Use [xlsform_containers()] to
+#' retrieve those rows as `"type:name"` identifiers.
 #'
 #' The returned vector is used internally by [validate_question_names()] to
 #' compare question inventories across two forms.

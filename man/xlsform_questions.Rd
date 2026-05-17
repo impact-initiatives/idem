@@ -23,8 +23,9 @@ A character vector of non-\code{NA} question names from the survey sheet.
 \description{
 Returns the values of the \code{name} column from the \code{survey} sheet, excluding
 rows where \code{name} is \code{NA} and structural container rows whose \code{type} starts
-with \code{"begin_"} or \code{"end_"} (e.g. \code{begin_group}, \code{end_repeat}). Use
-\code{\link[=xlsform_containers]{xlsform_containers()}} to retrieve those rows as \code{"type:name"} identifiers.
+with \code{"begin"} or \code{"end"} followed by an underscore or space (e.g.
+\code{begin_group}, \verb{begin group}, \code{end_repeat}). Use \code{\link[=xlsform_containers]{xlsform_containers()}} to
+retrieve those rows as \code{"type:name"} identifiers.
 }
 \details{
 The returned vector is used internally by \code{\link[=validate_question_names]{validate_question_names()}} to
