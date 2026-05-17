@@ -192,6 +192,104 @@ test_that("validate_question_names errors on non-xlsform dev", {
   expect_error(validate_question_names(x, list()), class = "rlang_error")
 })
 
+test_that("validate_question_names flags missing end_group", {
+  target <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_group", "text", "end_group"),
+      name = c("grp", "q1", "grp")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  dev <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_group", "text"),
+      name = c("grp", "q1")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  result <- validate_question_names(target, dev)
+  expect_equal(nrow(result), 1L)
+  expect_equal(result$name, "end_group:grp")
+  expect_equal(result$check, "question_names")
+})
+
+test_that("validate_question_names flags missing begin_group", {
+  target <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_group", "text", "end_group"),
+      name = c("grp", "q1", "grp")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  dev <- xlsform(
+    survey = tibble::tibble(
+      type = c("text", "end_group"),
+      name = c("q1", "grp")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  result <- validate_question_names(target, dev)
+  expect_equal(nrow(result), 1L)
+  expect_equal(result$name, "begin_group:grp")
+})
+
+test_that("validate_question_names flags missing end_repeat", {
+  target <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_repeat", "text", "end_repeat"),
+      name = c("rep", "q1", "rep")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  dev <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_repeat", "text"),
+      name = c("rep", "q1")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  result <- validate_question_names(target, dev)
+  expect_equal(nrow(result), 1L)
+  expect_equal(result$name, "end_repeat:rep")
+})
+
+test_that("validate_question_names reports missing question and container", {
+  target <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_group", "text", "text", "end_group"),
+      name = c("grp", "q1", "q2", "grp")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  dev <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_group", "text"),
+      name = c("grp", "q1")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  result <- validate_question_names(target, dev)
+  expect_equal(nrow(result), 2L)
+  expect_true("q2" %in% result$name)
+  expect_true("end_group:grp" %in% result$name)
+})
+
+test_that("validate_question_names does not flag containers only in dev", {
+  target <- xlsform(
+    survey = tibble::tibble(type = "text", name = "q1"),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  dev <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_group", "text", "end_group"),
+      name = c("grp", "q1", "grp")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  result <- validate_question_names(target, dev)
+  expect_equal(nrow(result), 0L)
+})
+
 # ── validate_list_names ───────────────────────────────────────────────────────
 
 test_that("validate_list_names returns 0 rows when forms are identical", {
