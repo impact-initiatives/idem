@@ -10,6 +10,105 @@ fixture_xlsform <- function(
   )
 }
 
+# ── xlsform_questions ─────────────────────────────────────────────────────────
+
+test_that("xlsform_questions returns bare names for non-container rows", {
+  x <- fixture_xlsform()
+  expect_equal(xlsform_questions(x), c("q1", "q2", "q3"))
+})
+
+test_that("xlsform_questions excludes begin_/end_ container rows", {
+  x <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_group", "text", "end_group"),
+      name = c("grp", "q1", "grp")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  expect_equal(xlsform_questions(x), "q1")
+})
+
+test_that("xlsform_questions excludes space-separated container rows", {
+  x <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin group", "text", "end group"),
+      name = c("grp", "q1", "grp")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  expect_equal(xlsform_questions(x), "q1")
+})
+
+test_that("xlsform_questions drops NA names", {
+  x <- xlsform(
+    survey = tibble::tibble(
+      type = c("text", "text"),
+      name = c("q1", NA)
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  expect_equal(xlsform_questions(x), "q1")
+})
+
+test_that("xlsform_questions.default errors on non-xlsform", {
+  expect_error(xlsform_questions(list()), class = "rlang_error")
+})
+
+# ── xlsform_containers ────────────────────────────────────────────────────────
+
+test_that("xlsform_containers returns type:name for begin_/end_ rows", {
+  x <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_group", "text", "end_group"),
+      name = c("grp", "q1", "grp")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  expect_equal(xlsform_containers(x), c("begin_group:grp", "end_group:grp"))
+})
+
+test_that("xlsform_containers handles space-separated types", {
+  x <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin group", "text", "end group"),
+      name = c("grp", "q1", "grp")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  expect_equal(xlsform_containers(x), c("begin group:grp", "end group:grp"))
+})
+
+test_that("xlsform_containers handles begin_repeat/end_repeat", {
+  x <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_repeat", "text", "end_repeat"),
+      name = c("rep", "q1", "rep")
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  expect_equal(xlsform_containers(x), c("begin_repeat:rep", "end_repeat:rep"))
+})
+
+test_that("xlsform_containers excludes non-container rows", {
+  x <- fixture_xlsform()
+  expect_length(xlsform_containers(x), 0L)
+})
+
+test_that("xlsform_containers drops rows with NA name", {
+  x <- xlsform(
+    survey = tibble::tibble(
+      type = c("begin_group", "end_group"),
+      name = c("grp", NA)
+    ),
+    choices = tibble::tibble(list_name = character(), name = character())
+  )
+  expect_equal(xlsform_containers(x), "begin_group:grp")
+})
+
+test_that("xlsform_containers.default errors on non-xlsform", {
+  expect_error(xlsform_containers(list()), class = "rlang_error")
+})
+
 # ── xlsform_choices ───────────────────────────────────────────────────────────
 
 test_that("xlsform_choices returns a named list", {
