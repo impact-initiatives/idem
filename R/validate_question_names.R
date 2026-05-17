@@ -1,12 +1,13 @@
-#' Validate question names between two XLSForms
+#' Validate survey rows between two XLSForms
 #'
-#' Checks that every question name and structural container present in
-#' `target`'s survey sheet also exists in `dev`'s survey sheet. Returns a
-#' tibble row for each entry found in `target` but absent from `dev`.
+#' Checks that every question and structural container present in `target`'s
+#' survey sheet also exists in `dev`'s survey sheet. Returns a tibble row for
+#' each entry found in `target` but absent from `dev`.
 #'
 #' Regular questions are compared by bare name via [xlsform_questions()].
-#' Structural container rows (`begin_group`, `end_group`, `begin_repeat`,
-#' `end_repeat`, etc.) are compared as `"type:name"` pairs via
+#' Structural container rows — those whose `type` starts with `"begin"` or
+#' `"end"` followed by an underscore or space (`begin_group`, `begin group`,
+#' `end_repeat`, etc.) — are compared as `"type:name"` pairs via
 #' [xlsform_containers()], so a missing `end_group` is detected even when its
 #' matching `begin_group` is present.
 #'
@@ -39,6 +40,23 @@
 #'   choices = target$choices
 #' )
 #' validate_question_names(target_extra, target)
+#'
+#' # Container issue: end_group missing from dev — flagged as "end_group:grp"
+#' # even though begin_group:grp is still present
+#' target_grp <- xlsform(
+#'   survey = data.frame(
+#'     type = c("begin_group", "text", "end_group"),
+#'     name = c("grp", "q1", "grp")
+#'   ),
+#'   choices = data.frame(list_name = character(), name = character())
+#' )
+#' dev_grp <- xlsform(
+#'   survey  = data.frame(
+#'     type = c("begin_group", "text"), name = c("grp", "q1")
+#'   ),
+#'   choices = data.frame(list_name = character(), name = character())
+#' )
+#' validate_question_names(target_grp, dev_grp)
 validate_question_names <- function(target, dev) {
   if (!inherits(target, "xlsform")) {
     cli::cli_abort(

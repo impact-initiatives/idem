@@ -41,7 +41,7 @@ individual \verb{validate_*()} functions and combines their results into a singl
 tibble.
 \subsection{Available checks}{\tabular{ll}{
    Check name \tab What it tests \cr
-   \code{"question_names"} \tab Every question name in \code{target} must exist in \code{dev}. \cr
+   \code{"question_names"} \tab Questions and containers in target must be in dev. \cr
    \code{"list_names"} \tab Every list name \emph{defined} in \code{target}'s choices sheet must also be defined in \code{dev}'s choices sheet. \cr
    \code{"survey_list_names"} \tab Every list name \emph{referenced} in \code{target}'s survey questions must also be referenced in \code{dev}'s survey questions. \cr
    \code{"choices"} \tab For every shared list, every choice option in \code{target} must exist in the same list in \code{dev}. \cr
@@ -55,7 +55,7 @@ Each row in the returned tibble represents one validation issue:\tabular{ll}{
    Column \tab Description \cr
    \code{check} \tab Which check produced this issue. \cr
    \code{severity} \tab Currently always \code{"error"}. \cr
-   \code{name} \tab The name of the offending question or choice option. \cr
+   \code{name} \tab Question name, \code{"type:name"} for containers, or choice option. \cr
    \code{list_name} \tab The choices list involved (\code{NA} for question-level checks). \cr
    \code{detail} \tab A human-readable description of the problem. \cr
 }

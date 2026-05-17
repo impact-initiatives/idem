@@ -2,7 +2,7 @@
 % Please edit documentation in R/validate_question_names.R
 \name{validate_question_names}
 \alias{validate_question_names}
-\title{Validate question names between two XLSForms}
+\title{Validate survey rows between two XLSForms}
 \usage{
 validate_question_names(target, dev)
 }
@@ -19,14 +19,15 @@ present in \code{dev}. Container rows appear as \code{"type:name"} in the \code{
 column (e.g. \code{"end_group:consented"}).
 }
 \description{
-Checks that every question name and structural container present in
-\code{target}'s survey sheet also exists in \code{dev}'s survey sheet. Returns a
-tibble row for each entry found in \code{target} but absent from \code{dev}.
+Checks that every question and structural container present in \code{target}'s
+survey sheet also exists in \code{dev}'s survey sheet. Returns a tibble row for
+each entry found in \code{target} but absent from \code{dev}.
 }
 \details{
 Regular questions are compared by bare name via \code{\link[=xlsform_questions]{xlsform_questions()}}.
-Structural container rows (\code{begin_group}, \code{end_group}, \code{begin_repeat},
-\code{end_repeat}, etc.) are compared as \code{"type:name"} pairs via
+Structural container rows — those whose \code{type} starts with \code{"begin"} or
+\code{"end"} followed by an underscore or space (\code{begin_group}, \verb{begin group},
+\code{end_repeat}, etc.) — are compared as \code{"type:name"} pairs via
 \code{\link[=xlsform_containers]{xlsform_containers()}}, so a missing \code{end_group} is detected even when its
 matching \code{begin_group} is present.
 }
@@ -44,6 +45,23 @@ target_extra <- xlsform(
   choices = target$choices
 )
 validate_question_names(target_extra, target)
+
+# Container issue: end_group missing from dev — flagged as "end_group:grp"
+# even though begin_group:grp is still present
+target_grp <- xlsform(
+  survey = data.frame(
+    type = c("begin_group", "text", "end_group"),
+    name = c("grp", "q1", "grp")
+  ),
+  choices = data.frame(list_name = character(), name = character())
+)
+dev_grp <- xlsform(
+  survey  = data.frame(
+    type = c("begin_group", "text"), name = c("grp", "q1")
+  ),
+  choices = data.frame(list_name = character(), name = character())
+)
+validate_question_names(target_grp, dev_grp)
 }
 \seealso{
 \code{\link[=validate_xlsform]{validate_xlsform()}} to run all checks together;
