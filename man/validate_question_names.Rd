@@ -14,19 +14,21 @@ form.}
 }
 \value{
 A tibble with columns \code{check}, \code{severity}, \code{name}, \code{list_name}, and
-\code{detail}. Has zero rows when all question names in \code{target} are present in
-\code{dev}.
+\code{detail}. Has zero rows when all questions and containers in \code{target} are
+present in \code{dev}. Container rows appear as \code{"type:name"} in the \code{name}
+column (e.g. \code{"end_group:consented"}).
 }
 \description{
-Checks that every question name present in \code{target}'s survey sheet also
-exists in \code{dev}'s survey sheet. Returns a tibble row for each question
-name found in \code{target} but absent from \code{dev}.
+Checks that every question name and structural container present in
+\code{target}'s survey sheet also exists in \code{dev}'s survey sheet. Returns a
+tibble row for each entry found in \code{target} but absent from \code{dev}.
 }
 \details{
-This check catches situations where the authoritative \code{target} form contains
-questions that the work-in-progress \code{dev} form has not yet included — for
-example, a localised adaptation that dropped required questions, or a form
-version that has fallen behind the central reference.
+Regular questions are compared by bare name via \code{\link[=xlsform_questions]{xlsform_questions()}}.
+Structural container rows (\code{begin_group}, \code{end_group}, \code{begin_repeat},
+\code{end_repeat}, etc.) are compared as \code{"type:name"} pairs via
+\code{\link[=xlsform_containers]{xlsform_containers()}}, so a missing \code{end_group} is detected even when its
+matching \code{begin_group} is present.
 }
 \examples{
 target <- read_xlsform(system.file("extdata/form.xlsx", package = "idem"))
@@ -45,5 +47,6 @@ validate_question_names(target_extra, target)
 }
 \seealso{
 \code{\link[=validate_xlsform]{validate_xlsform()}} to run all checks together;
-\code{\link[=xlsform_questions]{xlsform_questions()}} to extract question names from a form.
+\code{\link[=xlsform_questions]{xlsform_questions()}} to extract question names from a form;
+\code{\link[=xlsform_containers]{xlsform_containers()}} to extract container identifiers from a form.
 }

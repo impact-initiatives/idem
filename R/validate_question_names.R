@@ -1,24 +1,27 @@
 #' Validate question names between two XLSForms
 #'
-#' Checks that every question name present in `target`'s survey sheet also
-#' exists in `dev`'s survey sheet. Returns a tibble row for each question
-#' name found in `target` but absent from `dev`.
+#' Checks that every question name and structural container present in
+#' `target`'s survey sheet also exists in `dev`'s survey sheet. Returns a
+#' tibble row for each entry found in `target` but absent from `dev`.
 #'
-#' This check catches situations where the authoritative `target` form contains
-#' questions that the work-in-progress `dev` form has not yet included — for
-#' example, a localised adaptation that dropped required questions, or a form
-#' version that has fallen behind the central reference.
+#' Regular questions are compared by bare name via [xlsform_questions()].
+#' Structural container rows (`begin_group`, `end_group`, `begin_repeat`,
+#' `end_repeat`, etc.) are compared as `"type:name"` pairs via
+#' [xlsform_containers()], so a missing `end_group` is detected even when its
+#' matching `begin_group` is present.
 #'
 #' @param target An `xlsform` object representing the authoritative reference
 #'   form.
 #' @param dev An `xlsform` object representing the form being validated.
 #'
 #' @return A tibble with columns `check`, `severity`, `name`, `list_name`, and
-#'   `detail`. Has zero rows when all question names in `target` are present in
-#'   `dev`.
+#'   `detail`. Has zero rows when all questions and containers in `target` are
+#'   present in `dev`. Container rows appear as `"type:name"` in the `name`
+#'   column (e.g. `"end_group:consented"`).
 #'
 #' @seealso [validate_xlsform()] to run all checks together;
-#'   [xlsform_questions()] to extract question names from a form.
+#'   [xlsform_questions()] to extract question names from a form;
+#'   [xlsform_containers()] to extract container identifiers from a form.
 #'
 #' @export
 #'
@@ -50,17 +53,31 @@ validate_question_names <- function(target, dev) {
     )
   }
 
-  missing <- setdiff(xlsform_questions(target), xlsform_questions(dev))
+  missing_q <- setdiff(xlsform_questions(target), xlsform_questions(dev))
+  missing_c <- setdiff(xlsform_containers(target), xlsform_containers(dev))
 
-  tibble::tibble(
-    check = "question_names",
-    severity = "error",
-    name = missing,
-    list_name = NA_character_,
-    detail = paste0(
-      "Question '",
-      missing,
-      "' is present in target but not in dev."
+  rbind(
+    tibble::tibble(
+      check = "question_names",
+      severity = "error",
+      name = missing_q,
+      list_name = NA_character_,
+      detail = paste0(
+        "Question '",
+        missing_q,
+        "' is present in target but not in dev."
+      )
+    ),
+    tibble::tibble(
+      check = "question_names",
+      severity = "error",
+      name = missing_c,
+      list_name = NA_character_,
+      detail = paste0(
+        "Container '",
+        missing_c,
+        "' is present in target but not in dev."
+      )
     )
   )
 }

@@ -6,8 +6,6 @@
 \alias{idem-package}
 \title{idem: XLSForm Comparison and Validation}
 \description{
-\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
-
 Reads and compares XLSForm survey files, validating that a target form is consistent with a development form.
 }
 \seealso{
@@ -19,11 +17,6 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Iyed GHEDAMSI \email{iyed.ghedamsi@impact-initiatives.org}
-
-Authors:
-\itemize{
-  \item Iyed GHEDAMSI \email{iyed.ghedamsi@impact-initiatives.org}
-}
 
 }
 \keyword{internal}
