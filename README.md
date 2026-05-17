@@ -41,7 +41,7 @@ carry extra content; it must not be missing anything `target` requires.
 
 | Check | What is tested |
 |----|----|
-| `question_names` | Every question name in `target` must exist in `dev`. |
+| `question_names` | Every question name in `target` must exist in `dev`. Structural container rows (`begin_X`/`end_X`) are compared as `type:name` pairs, so a missing `end_group` is caught even when its `begin_group` is present. |
 | `list_names` | Every choice list *defined* in `target`’s choices sheet must also be defined in `dev`’s choices sheet. |
 | `survey_list_names` | Every choice list *referenced* by `target`’s survey questions must also be referenced in `dev`’s survey questions. |
 | `choices` | For every shared list, every choice option in `target` must exist in the same list in `dev`. |
