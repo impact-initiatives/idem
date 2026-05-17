@@ -1,8 +1,9 @@
 #' Get question names from an XLSForm
 #'
 #' Returns the values of the `name` column from the `survey` sheet, excluding
-#' any rows where `name` is `NA` (such as `begin_group` / `end_group` rows that
-#' carry no name).
+#' rows where `name` is `NA` and structural container rows whose `type` starts
+#' with `"begin_"` or `"end_"` (e.g. `begin_group`, `end_repeat`). Use
+#' [xlsform_containers()] to retrieve those rows as `"type:name"` identifiers.
 #'
 #' The returned vector is used internally by [validate_question_names()] to
 #' compare question inventories across two forms.
@@ -39,6 +40,7 @@ xlsform_questions.default <- function(x, ...) {
 #' @export
 #' @rdname xlsform_questions
 xlsform_questions.xlsform <- function(x, ...) {
-  names <- x$survey$name
+  survey <- x$survey
+  names <- survey$name[!is_container_type(survey$type)]
   names[!is.na(names)]
 }
