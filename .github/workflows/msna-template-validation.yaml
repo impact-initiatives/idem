@@ -24,7 +24,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v6
@@ -48,7 +48,7 @@ jobs:
         with:
           cache: true
           cache-version: 1
-          extra-packages: any::pkgload, any::openxlsx2
+          extra-packages: any::pkgload, any::openxlsx2, any::usethis
           needs: Imports
 
       - name: Trim form and check other_ coverage

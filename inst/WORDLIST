@@ -111,6 +111,7 @@ gz
 handwashing
 hardcoded
 heredocs
+hesper
 hh
 hlp
 hppu
@@ -170,10 +171,12 @@ README
 readme
 readxl
 recognised
+relevancies
 relicensing
 renv
 reprex
 req
+requireNamespace
 rlang
 rmarkdown
 Rmd
@@ -208,6 +211,7 @@ usethis
 uv
 uvx
 walkthrough
+wgss
 whl
 wip
 WIPO
