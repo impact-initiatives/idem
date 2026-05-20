@@ -56,7 +56,7 @@ An empty tibble means the form is fully compliant. Any rows flag content
 that `dev` is missing relative to `target`.
 
 See the [Getting
-started](https://impact-initiatives.github.io/idem/articles/getting-started.md)
+started](https://impact-initiatives.github.io/idem/articles/getting-started.html)
 article for a full walkthrough: exploring forms, understanding each
 check, running checks individually, skipping lists, and working with
 results.
