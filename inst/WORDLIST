@@ -30,6 +30,7 @@ bdf
 behaviour
 bfe
 bffeef
+bslib
 caa
 CalVer
 cb
@@ -67,6 +68,7 @@ devtools
 df
 dplyr
 dropdown
+DT
 eadcb
 eaf
 eb
@@ -189,6 +191,8 @@ sessioninfo
 Sexpr
 sha
 Sharepoint
+shinylive
+Shinylive
 snfi
 stringr
 striptags
@@ -203,11 +207,13 @@ tibbles
 tidyr
 tidyverse
 toml
+UI
 unreferenced
 usethis
 uv
 uvx
 walkthrough
+WebAssembly
 whl
 wip
 WIPO

@@ -21,10 +21,13 @@ Imports:
     stringr,
     tibble,
     tidyr
-Suggests: 
+Suggests:
+    bslib,
     dplyr,
+    DT,
     knitr,
     rmarkdown,
+    shiny,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 LazyData: true
