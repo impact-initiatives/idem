@@ -41,7 +41,9 @@ jobs:
         shell: Rscript {0}
 
       - name: Build Shinylive app
-        run: shinylive::export("app/", "docs/app/")
+        run: |
+          install.packages("idem", repos = "https://impact-initiatives.r-universe.dev")
+          shinylive::export("app/", "docs/app/")
         shell: Rscript {0}
 
       - name: Deploy to GitHub pages 🚀
