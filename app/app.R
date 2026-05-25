@@ -1,13 +1,16 @@
-# When running as Shinylive (WebAssembly), install idem from r-universe.
-# Requires: https://impact-initiatives.r-universe.dev (or CRAN once published).
 if (isTRUE(getOption("webr.loaded"))) {
-  webr::install(
-    "idem",
-    repos = c(
-      "https://impact-initiatives.r-universe.dev",
-      "https://repo.r-wasm.org"
-    )
-  )
+  # Pre-install deps from r-wasm.org; combined repos don't guarantee fallback.
+  webr::install(c(
+    "cli",
+    "lifecycle",
+    "purrr",
+    "readxl",
+    "rlang",
+    "stringr",
+    "tibble",
+    "tidyr"
+  ))
+  webr::install("idem", repos = "https://impact-initiatives.r-universe.dev")
 }
 
 library(shiny)
