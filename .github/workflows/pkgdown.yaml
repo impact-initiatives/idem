@@ -43,7 +43,7 @@ jobs:
       - name: Build Shinylive app
         run: |
           install.packages("idem", repos = "https://impact-initiatives.r-universe.dev")
-          shinylive::export("app/", "docs/app/")
+          shinylive::export("app/", "docs/app/", wasm_packages = FALSE)
         shell: Rscript {0}
 
       - name: Deploy to GitHub pages 🚀

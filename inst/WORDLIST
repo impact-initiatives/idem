@@ -153,10 +153,13 @@ option’
 parsers
 pkgdown
 pkgload
+pkgs
 pos
 pre
 precommit
 prek
+preload
+preloader
 preprocessors
 prot
 PRs
@@ -194,6 +197,7 @@ sha
 Sharepoint
 shinylive
 Shinylive
+shinylive's
 snfi
 stringr
 striptags

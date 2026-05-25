@@ -1,6 +1,6 @@
 if (isTRUE(getOption("webr.loaded"))) {
-  # Pre-install deps from r-wasm.org; combined repos don't guarantee fallback.
   webr::install(c(
+    "DT",
     "cli",
     "lifecycle",
     "purrr",
