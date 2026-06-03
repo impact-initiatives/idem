@@ -69,7 +69,7 @@ hooks-update:
 
 # Regenerate data/msna_template_required.rda from inst/extdata sources
 data:
-    Rscript -e "if (!requireNamespace('usethis', quietly = TRUE)) stop('Install usethis to run `just data`.', call. = FALSE); devtools::load_all(); source('data-raw/msna_template_required.R')"
+    Rscript -e "if (!requireNamespace('usethis', quietly = TRUE)) stop('Install usethis to run \`just data\`.', call. = FALSE); devtools::load_all(); source('data-raw/msna_template_required.R')"
 
 # ── Validation ────────────────────────────────────────────────────────────────
 
