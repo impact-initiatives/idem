@@ -48,7 +48,7 @@ jobs:
         with:
           cache: true
           cache-version: 1
-          extra-packages: any::pkgload, any::openxlsx2
+          extra-packages: any::pkgload, any::openxlsx2, any::usethis
           needs: Imports
 
       - name: Trim form and check other_ coverage

@@ -176,6 +176,7 @@ relicensing
 renv
 reprex
 req
+requireNamespace
 rlang
 rmarkdown
 Rmd
