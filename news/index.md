@@ -1,5 +1,24 @@
 # Changelog
 
+## idem 2026.6.3
+
+### MSNA template
+
+- Bundled reference template updated to remove
+  `other_specialized_services` from
+  `l_health_ind_healthcare_needed_type`.
+- Passing lists in the bundled template were reduced to placeholder rows
+  only.
+- Fixed skip logic value mismatches in the bundled template and restored
+  the missing `water_source_not_segregated_gender` choice.
+- Renamed `serious_problem` to `problem` in `l_hesper` and related
+  relevancies.
+- Restricted menstrual hygiene questions to female respondents.
+
+### Bug fixes
+
+- `idem_passing_lists` now includes `l_admin4` and `l_cluster_id`.
+
 ## idem 2026.5.6
 
 ### MSNA template

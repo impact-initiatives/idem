@@ -17,7 +17,7 @@ validated — you do not need to load the template separately.
 msna_template_required
 #> <xlsform> NA
 #> • survey: 313 rows
-#> • choices: 2484 rows
+#> • choices: 549 rows
 ```
 
 ``` r
@@ -487,7 +487,8 @@ accept a `passing_lists` argument for this purpose. The default is
 ``` r
 
 idem_passing_lists
-#> [1] "l_admin1"  "l_admin2"  "l_admin3"  "l_enum_id"
+#> [1] "l_admin1"     "l_admin2"     "l_admin3"     "l_admin4"     "l_cluster_id"
+#> [6] "l_enum_id"
 ```
 
 Any list named in `passing_lists` is excluded from the options

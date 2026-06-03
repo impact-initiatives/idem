@@ -62,7 +62,7 @@ form <- read_xlsform(path)
 form
 #> <xlsform> /home/runner/work/_temp/Library/idem/extdata/form.xlsx
 #> • survey: 717 rows
-#> • choices: 3714 rows
+#> • choices: 1773 rows
 
 # Inspect the survey sheet directly
 form$survey
@@ -94,5 +94,5 @@ read_xlsform(path, optional_sheets = "settings")
 #> ! Excluded: "settings"
 #> <xlsform> /home/runner/work/_temp/Library/idem/extdata/form.xlsx
 #> • survey: 717 rows
-#> • choices: 3714 rows
+#> • choices: 1773 rows
 ```

@@ -17,5 +17,6 @@ idem_passing_lists
 
 ``` r
 idem_passing_lists
-#> [1] "l_admin1"  "l_admin2"  "l_admin3"  "l_enum_id"
+#> [1] "l_admin1"     "l_admin2"     "l_admin3"     "l_admin4"     "l_cluster_id"
+#> [6] "l_enum_id"   
 ```

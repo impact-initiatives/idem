@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">idem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2026.5.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2026.6.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,6 @@
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
-<li class="nav-item"><a class="nav-link" href="../app/">Web App</a></li>
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
@@ -78,7 +77,7 @@ do not need to load the template separately.</p>
 <code class="sourceCode R"><span><span class="va">msna_template_required</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">&lt;xlsform&gt;</span> <span style="color: #0000BB;">NA</span></span></span>
 <span><span class="co">#&gt; • <span style="color: #00BB00;">survey</span>: 313 rows</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BB00;">choices</span>: 2484 rows</span></span></code></pre></div>
+<span><span class="co">#&gt; • <span style="color: #00BB00;">choices</span>: 549 rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/xlsform_questions.html">xlsform_questions</a></span><span class="op">(</span><span class="va">msna_template_required</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "audit"           "start"           "end"             "today"          </span></span>
@@ -662,7 +661,8 @@ argument for this purpose. The default is
 directly:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">idem_passing_lists</span></span>
-<span><span class="co">#&gt; [1] "l_admin1"  "l_admin2"  "l_admin3"  "l_enum_id"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "l_admin1"     "l_admin2"     "l_admin3"     "l_admin4"     "l_cluster_id"</span></span>
+<span><span class="co">#&gt; [6] "l_enum_id"</span></span></code></pre></div>
 <p>Any list named in <code>passing_lists</code> is excluded from the
 options comparison. To extend the default with a project-specific list,
 pass a combined vector:</p>
