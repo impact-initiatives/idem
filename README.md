@@ -22,7 +22,7 @@ before it causes problems in data collection or analysis.
 
 ``` r
 # install.packages("pak")
-pak::pak("impact-initiatives/idem@v2026.5.6")
+pak::pak("impact-initiatives/idem@v2026.6.3")
 ```
 
 ## Key concepts
