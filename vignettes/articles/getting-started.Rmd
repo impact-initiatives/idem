@@ -63,8 +63,23 @@ contents of any form.
 
 ### Question names
 
+`xlsform_questions()` returns bare question names, excluding structural
+container rows (`begin_X`/`end_X`).
+
 ```{r questions}
 xlsform_questions(target) |> head(15)
+```
+
+### Container rows
+
+Structural rows — those whose `type` starts with `"begin"` or `"end"`
+followed by an underscore or space (`begin_group`, `begin group`,
+`end_repeat`, etc.) — are extracted separately as `"type:name"` identifiers.
+This keeps them distinct even though XLSForm requires both halves of a pair
+to share the same name.
+
+```{r containers}
+xlsform_containers(target) |> head(10)
 ```
 
 ### Choice lists referenced in the survey
@@ -209,7 +224,9 @@ Each check can also be run in isolation when you only need a focused result.
 
 ### `validate_question_names()`
 
-Checks that every question name in `target` exists in `dev`.
+Checks that every question name in `target` exists in `dev`. It also
+compares structural container rows as `"type:name"` pairs, so a missing
+`end_group` is flagged even when the matching `begin_group` is present.
 
 ```{r check-question-names}
 result_qn <- validate_question_names(target_with_issues, dev)

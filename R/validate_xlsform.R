@@ -13,7 +13,7 @@
 #'
 #' | Check name | What it tests |
 #' |---|---|
-#' | `"question_names"` | Every question name in `target` must exist in `dev`. |
+#' | `"question_names"` | Questions and containers in target must be in dev. |
 #' | `"list_names"` | Every list name *defined* in `target`'s choices sheet must also be defined in `dev`'s choices sheet. |
 #' | `"survey_list_names"` | Every list name *referenced* in `target`'s survey questions must also be referenced in `dev`'s survey questions. |
 #' | `"choices"` | For every shared list, every choice option in `target` must exist in the same list in `dev`. |
@@ -26,7 +26,7 @@
 #' |---|---|
 #' | `check` | Which check produced this issue. |
 #' | `severity` | Currently always `"error"`. |
-#' | `name` | The name of the offending question or choice option. |
+#' | `name` | Question name, `"type:name"` for containers, or choice option. |
 #' | `list_name` | The choices list involved (`NA` for question-level checks). |
 #' | `detail` | A human-readable description of the problem. |
 #'
