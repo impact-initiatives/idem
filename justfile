@@ -73,7 +73,7 @@ data:
 
 # Convert inst/extdata/form_required.xlsx to pyxform survey JSON
 xlsform-json:
-    uvx --from pyxform python -c "import json, pyxform.xls2json as m; json.dump(m.parse_file_to_json('inst/extdata/form_required.xlsx'), open('inst/extdata/form_required.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))"
+    uvx --from pyxform python -c "import json, pyxform.xls2json as m; json.dump(m.parse_file_to_json('inst/extdata/form.xlsx'), open('inst/extdata/form.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))"
 
 # ── Validation ────────────────────────────────────────────────────────────────
 
