@@ -71,6 +71,10 @@ hooks-update:
 data:
     Rscript -e "if (!requireNamespace('usethis', quietly = TRUE)) stop('Install usethis to run \`just data\`.', call. = FALSE); devtools::load_all(); source('data-raw/msna_template_required.R')"
 
+# Convert inst/extdata/form_required.xlsx to pyxform survey JSON
+xlsform-json:
+    uvx --from pyxform python -c "import pyxform.xls2json as m; m.print_pyobj_to_json(m.parse_file_to_json('inst/extdata/form_required.xlsx'), 'inst/extdata/form_required.json')"
+
 # ── Validation ────────────────────────────────────────────────────────────────
 
 # Validate form.xlsx: pyxform check, trim + other_ coverage, trim pyxform check (mirrors CI)
